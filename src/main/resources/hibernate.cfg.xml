@@ -5,7 +5,7 @@
     <session-factory>
         <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQL94Dialect</property>
         <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
-        <property name="hibernate.connection.username">alhafoudh</property>
+        <!--<property name="hibernate.connection.username"/>-->
         <property name="hibernate.connection.password"/>
         <property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/hibernate-test</property>
         <!--<property name="default_entity_mode">dynamic-map</property>-->
