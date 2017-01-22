@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class entity-name="Book" table="books">
+        <id name="id" type="int" column="id">
+            <generator class="identity">
+                <param name="books_seq"/>
+            </generator>
+        </id>
+        <property name="title" column="title" type="string"/>
+        <property name="published" column="published" type="int"/>
+
+        <many-to-one name="author" column="author" entity-name="Author" not-null="true" cascade="all"/>
+
+        <set name="owners" table="orders" cascade="save-update">
+            <key column="id"/>
+            <many-to-many column="user_id" entity-name="User"/>
+        </set>
+    </class>
+
+    <class entity-name="Author" table="authors">
+        <id name="id" type="int" column="id">
+            <generator class="identity">
+                <param name="authors_seq"/>
+            </generator>
+        </id>
+        <property name="name" column="name" type="string"/>
+    </class>
+
+    <class entity-name="User" table="users">
+        <id name="id" type="int" column="id">
+            <generator class="identity">
+                <param name="users_seq"/>
+            </generator>
+        </id>
+        <property name="name" column="name" type="string"/>
+    </class>
+
+    <class entity-name="Order" table="orders">
+        <id name="id" type="int" column="id">
+            <generator class="identity">
+                <param name="orders_seq"/>
+            </generator>
+        </id>
+
+        <many-to-one name="book" entity-name="Book" column="book_id" cascade="all" not-null="true"/>
+        <many-to-one name="user" entity-name="User" column="user_id" cascade="all" not-null="true"/>
+    </class>
+</hibernate-mapping>
